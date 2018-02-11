@@ -20,13 +20,22 @@ import AddCity from './containers/addCity';
 //Need to use switch to get Add to work: https://reacttraining.com/react-router/web/example/no-match
 
 class App extends Component {
+
+
+
   render() {
     return (
       <BrowserRouter>
       <div className="bg-off-white padding-medium">
-        <h1 className="padding-bottom-medium">Dojo Weather Forecast</h1>
-        <p><Link to="/add">Add a Weather Forecast</Link></p>
-        <NavigationBar />
+        <div className="text-center">
+          <h1 className="padding-bottom-medium">Dojo Weather Forecast</h1>
+        </div>
+        <div className="text-center">
+          <p><Link to="/add">Add a Weather Forecast</Link></p>
+        </div>
+        <div className="text-center">
+          <NavigationBar />
+        </div>
         <div className="card padding-medium">
           <Switch>
             <Route exact path="/" component={Home} />

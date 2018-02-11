@@ -10,6 +10,7 @@ import '../ui-toolkit/css/nm-cx/main.css';
 
 //App imports
 import { OldSchoolMenuLink } from '../components/activeLinks';
+import { getCityWeatherData } from '../actions/actions';
 
 
 class NavigationBar extends Component {
@@ -20,15 +21,17 @@ class NavigationBar extends Component {
     }
 
     mapCitiesToNavigationBar = (cityObject, arrayIndex) => {
-
+        console.log("In mapCitiesToNavigationBar");
         return(
-            <Link to={"/" + cityObject.cityName.replace(/ /g, '')} key={"cityKey" + arrayIndex} >{cityObject.cityName}</Link>
+            <div key={"cityLink" + arrayIndex} style={{display: "inline-block", padding: "3px"}}>
+                &nbsp;<Link to={"/" + cityObject.cityName} key={"cityKey" + arrayIndex} onClick={() => {this.props.lookupCityWeatherData(cityObject.cityName)}} >{cityObject.cityName}</Link>&nbsp;
+            </div>
         )
-
         //<OldSchoolMenuLink activeOnlyWhenExact={true} to={"/" + cityObject.cityName.replace(' ', '')} label={cityObject.cityName} />
     }
 
     render() {
+        console.log("Enterying NavigationBar Render()");
 
         return (
             <ul className="heading-nav padding-bottom-medium">
@@ -36,6 +39,7 @@ class NavigationBar extends Component {
         </ul>
         );
     }
+
 } //end NavigationBar class
 
 const mapStateToProps = (state) => {
@@ -46,9 +50,9 @@ const mapStateToProps = (state) => {
   
   const mapDispatchToProps = (dispatch) => {
       return {
-        //createProduct: (productObject, addRedirectFunction) => {
-        //    dispatch(createPPMProduct(productObject, addRedirectFunction))
-        //}
+        lookupCityWeatherData: (cityName) => {
+            dispatch(getCityWeatherData(cityName));
+        }
       };
   };
   
